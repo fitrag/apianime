@@ -1,9 +1,11 @@
 const cheerio = require('cheerio')
 const express = require('express')
 const axios = require('axios')
+const cors = require('cors')
 const baseUrl = require('./url')
 const app = express()
 
+app.use(cors())
 app.get("/manga", (req, res) => {
     try{
     axios.get(baseUrl + "manga/?order=update")
