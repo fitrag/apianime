@@ -1,0 +1,19 @@
+{
+  "name": "apiku",
+  "version": "1.0.0",
+  "description": "coba",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "keywords": [
+    "npm"
+  ],
+  "author": "fadil",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cheerio": "^1.0.0-rc.5",
+    "express": "^4.17.1"
+  }
+}
