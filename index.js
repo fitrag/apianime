@@ -2,6 +2,7 @@ const cheerio = require('cheerio')
 const express = require('express')
 const axios = require('axios')
 const baseUrl = require('./url')
+const port = Process.env.PORT || 3000
 const app = express()
 
 app.get("/manga", (req, res) => {
@@ -123,7 +124,7 @@ app.get("/chapter/:slug", (req,res) => {
 })
 
         
-    app.listen(8080, function () {
+    app.listen(port, function () {
         console.log("Started application on port %d", 10000)
     });
     
