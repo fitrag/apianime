@@ -1,6 +1,7 @@
 const cheerio = require('cheerio')
 const express = require('express')
 const axios = require('axios')
+const PORT = process.env.PORT || 3000
 const cors = require('cors')
 const baseUrl = require('./url')
 const app = express()
@@ -125,7 +126,7 @@ app.get("/chapter/:slug", (req,res) => {
 })
 
         
-    app.listen(8080, function () {
+    app.listen(PORT, function () {
         console.log("Started application on port %d", 10000)
     });
     
