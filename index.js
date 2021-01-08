@@ -90,9 +90,11 @@ app.get("/manga/detail/:slug", (req, res) => {
 })
 
 app.get("/chapter/:slug", (req,res) => {
-    const slug = req.params.slug
-    axios.get("https://komikcast.com/chapter/" + slug)
+    const slug = req.params.slug.replace("-bahasa-indonesia"," ")
+    console.log(slug)
+    axios.get("https://komikindo.co/" + slug)
     .then(response => {
+        // console.log(response)
         const $ = cheerio.load(response.data)
         const perapih = $("#content")
         const obj = {}
@@ -102,7 +104,7 @@ app.get("/chapter/:slug", (req,res) => {
             obj.title = $(el).find(".headpost").find("h1").text()
         })
 
-        perapih.find(".wrapper > .chapterbody > .postarea > article > .maincontent > #readerarea > img").each((id, el) => {
+        perapih.find(".wrapper > .chapterbody > .postarea > article > .maincontent > #readerarea > p > img").each((id, el) => {
             chapter_image = $(el).attr("src").replace("https://cdn.komikcast.com/","http://cdn.komikcast.com/")
             chapter_list.push({
                 chapter_image,
