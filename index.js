@@ -18,7 +18,7 @@ app.get("/manga", (req, res) => {
     let link,title,img, chapter, type;
 
     perapih.find(".wrapper > .postbody > .bixbox > .mrgn > .listupd > .bs").each((id, el) => {
-        link    = $(el).find(".bsx > a").attr('href').replace(baseUrl, "")
+        link    = $(el).find(".bsx > a").attr('href').replace(baseUrl+"manga/", "")
         img     = $(el).find(".bsx > a").find("img").attr('src').replace("?resize=165,225","")
         type    = $(el).find(".bsx > a").find(".type").text()
         title   = $(el).find(".bsx > a").find(".tt").text().trim()
