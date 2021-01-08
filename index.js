@@ -89,15 +89,6 @@ app.get("/manga/detail/:slug", (req, res) => {
     
 })
 
-const ambil = async (slug) => {
-    try{
-        let res = await axios.get("https://komikcast.com/chapter/solo-leveling-chapter-134-bahasa-indonesia/")
-        return res
-    }catch(err){
-        console.log(err)
-    }
-
-}
 app.get("/chapter/:slug", (req,res) => {
     const slug = req.params.slug
     axios.get("https://komikcast.com/chapter/" + slug)
