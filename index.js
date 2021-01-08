@@ -111,6 +111,11 @@ app.get("/chapter/:slug", (req,res) => {
             obj.chapter_list = chapter_list
         })
         res.json(obj)
+    }).catch(e =>{
+        res.send({
+            status:503,
+            message:"Gagal mengambil chapter"
+        })
     })
     
         
