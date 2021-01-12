@@ -123,6 +123,71 @@ app.get("/chapter/:slug", (req,res) => {
         
 })
 
+app.get("/search/:query/:page", (req, res) => {
+    const query = req.params.query
+    const pageId = parseInt(req.params.page)
+
+    const data = {}
+    let search_result = []
+
+    data.currentPage = pageId
+    data.nextPage = pageId + 1
+
+    let url = (pageId === 1) ? 'https://komikindo.co/?s=' + query : 'https://komikindo.co/page/' + pageId + '/?s=' + query
+    axios.get(url)
+    .then(response => {
+        const $ = cheerio.load(response.data)
+        const content = $(".listupd")
+        content.find(".bs").each((id, el) => {
+            let link = $(el).find(".bsx > a").attr("href").replace("https://komikindo.co/manga/","")
+            let title = $(el).find(".bsx > a > .bigor > .tt").text()
+            let chapter = $(el).find(".bsx > a > .bigor > .adds > .epxs").text()
+            let img = $(el).find(".bsx > a > .limit").find("img").attr("src")
+            let type = $(el).find(".bsx > a > .limit").find(".type").text()
+
+            search_result.push({
+                title,
+                img,
+                type,
+                chapter,
+                link
+            })
+            data.search_result = search_result
+        })
+        res.json(data)
+    })
+})
+
+app.get("/detail/search/:slug", (req, res) => {
+    const slug = req.params.slug
+    axios.get("https://komikindo.co/manga/" + slug)
+    .then(response => {
+        const $ = cheerio.load(response.data)
+        const content = $(".postbody")
+
+        const detailManga = {}
+        let chapter_list = []
+
+        content.find("article").each((id, el) => {
+            detailManga.img = $(el).find(".bigcover > .ime").find("img").attr('src')
+            detailManga.judul = $(el).find(".bigcontent > .infox").find("h1").text()
+            detailManga.sinopsis = $(el).find(".bigcontent > .infox > .desc").find("p").text()
+        })
+
+        content.find(".hentry > .bixbox > ul > li").each((id, el) => {
+            let link   = $(el).find(".lchx").find("a").attr("href").replace("https://komikindo.co/","")
+            let chapter   = $(el).find(".lchx").find("a").text()
+            chapter_list.push({
+                chapter,
+                link
+            })
+            detailManga.chapter_list = chapter_list
+        })
+
+        res.json(detailManga)
+    })
+})
+
         
     app.listen(PORT, function () {
         console.log("Started application on port %d", 10000)
