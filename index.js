@@ -191,7 +191,7 @@ app.get("/detail/search/:slug", (req, res) => {
     })
 })
 
-// Manga Other API
+// Manga Other API v2
 
 app.get("/manga/v2/page/:id", (req, res) => {
     const pageId = parseInt(req.params.id)
