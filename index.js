@@ -234,7 +234,7 @@ app.get("/manga/v2/page/:id", (req, res) => {
 
         })
     }catch{
-
+        res.send({message:"Upss"})
     }
 })
 
