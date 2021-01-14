@@ -228,7 +228,7 @@ app.get("/manga/v2/page/:id", (req, res) => {
 
             res.json(obj)
 
-        }).catch(() => {
+        }).catch(e => {
             res.send({
                 message:"Something wrong"
             })
@@ -292,7 +292,7 @@ app.get("/manga/v2/detail/:slug", (req, res) => {
             res.json(obj)
             
 
-        }).catch(() => {
+        }).catch(e => {
             res.send({
                 message:"Something wrong"
             })
@@ -333,7 +333,7 @@ app.get("/manga/v2/chapter/:slug", (req, res) => {
             res.json(obj)
             
 
-        }).catch(() => {
+        }).catch(e => {
             res.send({
                 message:"Something wrong"
             })
