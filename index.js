@@ -193,7 +193,6 @@ app.get("/detail/search/:slug", (req, res) => {
 app.get("/manga/v2/page/:id", (req, res) => {
     const pageId = parseInt(req.params.id)
     let url = pageId == 1 ? 'https://komikcast.com/daftar-komik/?order=update' : 'https://komikcast.com/daftar-komik/page/' + pageId +'/?order=update'
-    try{
         axios.get(url)
         .then(response => {
             const $ = cheerio.load(response.data)
@@ -229,19 +228,17 @@ app.get("/manga/v2/page/:id", (req, res) => {
 
             res.json(obj)
 
+        }).catch(() => {
+            res.send({
+                message:"Something wrong"
+            })
         })
-    }catch{
-        res.json({
-            message:"Ups error"
-        })
-    }
 })
 
 app.get("/manga/v2/detail/:slug", (req, res) => {
     const slug = req.params.slug
 
     console.log(slug)
-    try{
         axios.get("https://komikcast.com/komik/" + slug)
         .then(response => {
             const $ = cheerio.load(response.data)
@@ -300,16 +297,10 @@ app.get("/manga/v2/detail/:slug", (req, res) => {
                 message:"Something wrong"
             })
         })
-    }catch{
-        res.send({
-            message:"Something wrong"
-        })
-    }
 })
 
 app.get("/manga/v2/chapter/:slug", (req, res) => {
     const slug = req.params.slug
-    try{
         axios.get("https://komikcast.com/chapter/" + slug)
         .then(response => {
             const $ = cheerio.load(response.data)
@@ -347,11 +338,6 @@ app.get("/manga/v2/chapter/:slug", (req, res) => {
                 message:"Something wrong"
             })
         })
-    }catch{
-        res.send({
-            message:"Something wrong"
-        })
-    }
 })
 
         
