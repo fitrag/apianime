@@ -231,7 +231,9 @@ app.get("/manga/v2/page/:id", (req, res) => {
 
         })
     }catch{
-
+        res.json({
+            message:"Ups error"
+        })
     }
 })
 
